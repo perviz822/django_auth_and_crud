@@ -29,10 +29,11 @@ class CustomUserManager(BaseUserManager):
 
 class NewUser(AbstractBaseUser,PermissionsMixin):
     email=models.EmailField(unique=True)
-    user_name=models.CharField(unique=True)
-    about =models.CharField(blank=True)
+    user_name=models.CharField(max_length=32,unique=True)
+    about =models.CharField(max_length=512,blank=True)
     is_staff=models.BooleanField(default=False)
     is_active=models.BooleanField(default=False) 
+    objects=CustomUserManager();
     USERNAME_FIELD='email'
     REQUIRED_FIELDS=['user_name']
 
