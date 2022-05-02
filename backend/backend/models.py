@@ -35,7 +35,7 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
         user_name=models.CharField(max_length=32,unique=True)
         about =models.CharField(max_length=512,blank=True,null=True)
         is_staff=models.BooleanField(default=False)
-        is_active=models.BooleanField(default=False) 
+        is_active=models.BooleanField(default=True) 
         objects=CustomUserManager();
         USERNAME_FIELD='email'
         REQUIRED_FIELDS=['user_name','first_name']
