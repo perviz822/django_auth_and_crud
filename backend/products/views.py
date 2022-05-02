@@ -2,9 +2,11 @@ from django.shortcuts import render
 from rest_framework import generics;
 from rest_framework.decorators import api_view;
 from django.http import HttpResponse, JsonResponse
+from yaml import serialize
 from products.models import Products
-from products.serializers import ProductsSerializer
-
+from products.serializers import ProductsSerializer,CustomUserSerializer
+from backend.models import NewUser
+from rest_framework.permissions import AllowAny
 
 @api_view (["GET"])
 def list_view(request):
@@ -45,6 +47,24 @@ def update(request):
         instance.expiration_date=request.data['expiration_date'] 
         instance.save();
         return HttpResponse("Update was succesfull")    
+
+@api_view(["POST"])
+def create_user(request):
+    permission_classes=[AllowAny]
+    serializer=CustomUserSerializer(data=request.data)
+    if serializer.is_valid():
+        instance=NewUser.objects.create(**request.data);
+        instance.set_password(request.data['password'])
+        instance.save();
+        print("register was succesfull")
+    else:
+        print("Something went wrong")  
+
+    return HttpResponse("Update was succesfull")      
+
+      
+  
+
 
 
 

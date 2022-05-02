@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from products.views import list_view, post,delete,retrieve, update
+from products.views import list_view, post,delete,retrieve, update,create_user
 from rest_framework_simplejwt.views import(
     TokenObtainPairView,
     TokenRefreshView
@@ -28,5 +28,6 @@ urlpatterns = [
     path('retrieve/',retrieve),
     path('update/',update),
     path('get_token/',TokenObtainPairView.as_view()),
-    path('get_refresh_token/',TokenRefreshView.as_view())
+    path('get_refresh_token/',TokenRefreshView.as_view()),
+    path('create_user/',create_user)
 ]

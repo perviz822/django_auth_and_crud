@@ -11,7 +11,7 @@ class UserAdminConfig(UserAdmin):
     ordering=('user_name',)
     list_display=('email','user_name','first_name','is_active','is_staff','is_superuser')
     fieldsets=(
-        (None,{'fields':('email','user_name','first_name')}),
+        (None,{'fields':('email','user_name','first_name','password')}),
         ('Permissions',{'fields':('is_staff','is_active','is_superuser')}),
         ('Personal',{'fields':('about',)}),
 
