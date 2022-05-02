@@ -57,5 +57,3 @@ def update(request):
 
 
 
-
-# Create your views here.
