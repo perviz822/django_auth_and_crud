@@ -3,10 +3,10 @@ import {useState,useEffect} from 'react'
 import useHistory from 'react-router-dom'
 import Style from '../style/form.module.css'
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const Register =()=>{
     const history=useNavigate();
-
     const handleRegister=(e)=>{
         e.preventDefault()
         let data={
@@ -20,10 +20,7 @@ const Register =()=>{
         .then(()=>{
             history('/login')
         })
-
     }
-
-
 return (
     <>
     <form className={Style.form} onSubmit={handleRegister}>
@@ -34,6 +31,10 @@ return (
 
      
       <button type='submit'> REGISTER</button>
+
+
+     Already have account? <Link to='/login'>Login</Link>
+
 
     </form>
     </>

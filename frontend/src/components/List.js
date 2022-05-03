@@ -7,7 +7,15 @@ import style_for_table from  '../style/table.module.css'
 const List =()=>{
     const[data,set_data]=useState([]);
  useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/products/')
+    let config={
+        headers:{
+            Authorization: "Bearer"+ " " + localStorage.getItem('access_token')
+           
+        }
+    }
+
+    
+    axios.get('http://127.0.0.1:8000/products/',config)
     .then(res=>{
         set_data(res.data.map(element=>
 

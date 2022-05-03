@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from rest_framework import generics;
-from rest_framework.decorators import api_view;
+from rest_framework.decorators import api_view,permission_classes,authentication_classes
 from django.http import HttpResponse, JsonResponse
 from yaml import serialize
 from products.models import Products
 from products.serializers import ProductsSerializer,CustomUserSerializer
 from backend.models import NewUser
 from rest_framework.permissions import AllowAny
+from rest_framework import permissions, authentication
 
 @api_view (["GET"])
+@permission_classes([permissions.IsAuthenticated])
 def list_view(request):
     instances=Products.objects.all();
     serializer=ProductsSerializer(instances,many=True);
@@ -34,7 +36,6 @@ def delete(request)  :
 
 @api_view(["POST"])
 def retrieve(request):
-    print(request.data)
     instance=Products.objects.get(id=request.data['id']);
     serializer=ProductsSerializer(instance);
     return JsonResponse(serializer.data)
@@ -50,7 +51,6 @@ def update(request):
 
 @api_view(["POST"])
 def create_user(request):
-    permission_classes=[AllowAny]
     serializer=CustomUserSerializer(data=request.data)
     if serializer.is_valid():
         instance=NewUser.objects.create(**request.data);
