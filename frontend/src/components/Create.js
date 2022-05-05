@@ -2,7 +2,7 @@ import Style from '../style/h1.module.css'
 import style_for_form from '../style/form.module.css'
 import axios from 'axios'
 
-const Create =()=>{
+const Create =(props)=>{
 
 const createData=(event)=>{
     event.preventDefault();
@@ -11,7 +11,14 @@ const createData=(event)=>{
         'price':event.target[1].value,
         'expiration_date':event.target[2].value
     }
-    axios.post('http://127.0.0.1:8000/create/', data)
+    axios.post('http://127.0.0.1:8000/create/', data).then((res)=>{
+        return res
+
+    })
+    .catch((res)=>{
+        props.set_changed()
+
+    })
 }
     return(
         <> 

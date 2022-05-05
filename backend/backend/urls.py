@@ -20,6 +20,7 @@ from rest_framework_simplejwt.views import(
     TokenObtainPairView,
     TokenRefreshView
 )
+from post.views import get_your_posts,post_content
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/',list_view),
@@ -29,5 +30,7 @@ urlpatterns = [
     path('update/',update),
     path('get_token/',TokenObtainPairView.as_view()),
     path('get_refresh_token/',TokenRefreshView.as_view()),
-    path('create_user/',create_user)
+    path('create_user/',create_user),
+    path('get_your_posts/',get_your_posts),
+    path('post_content/',post_content)
 ]

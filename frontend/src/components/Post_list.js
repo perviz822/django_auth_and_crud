@@ -2,11 +2,11 @@ import Style from '../style/h1.module.css'
 import axios from 'axios'
 import {useEffect,useState} from 'react'
 import style_for_table from  '../style/table.module.css'
-const List =(props)=>{
+const Post_list =(props)=>{
    
     const[data,set_data]=useState([]);
     const[access_token,set_access_token]= useState(localStorage.getItem('access_token'))
-     console.log("LIST js")
+    console.log(access_token)
  useEffect(()=>{
     let token=localStorage.getItem('refresh_token')
     let config={
@@ -15,14 +15,13 @@ const List =(props)=>{
           }
          }
 
-    axios.get('http://127.0.0.1:8000/products/',config)
+    axios.get('http://127.0.0.1:8000/get_your_posts/',config)
     .then(res=>{
         set_data(res.data.map(element=>
-            <tr>
-                <td>{element.name}</td>
-                <td>{element.price}</td>
-                <td>{element.expiration_date}</td>
-            </tr>  ),
+            <div>
+                {element.content}
+            </div>
+             ),
                 )
        return res
     })
@@ -36,20 +35,14 @@ const List =(props)=>{
         }
     })
 
- },[access_token,props.changed])
+ },[access_token])
 
     return(
         <> 
-          <table className={style_for_table.table}>
-          <tr>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Expiration Date</th>
-              </tr>
-it 
-              {data}
-          </table>
+        <div>
+            {data}
+        </div>
       </>
     )
    }
-export default List
+export default Post_list
